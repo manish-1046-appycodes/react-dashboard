@@ -23,7 +23,7 @@ const SearchPage = () => {
   const formik = useFormik({
     initialValues: {
       searchTerm: '',
-      searchCount: '',
+      searchCount: 2,
     },
     onSubmit: async (values) => {
       const data = {

@@ -8,15 +8,11 @@ import Page404 from './pages/Page404';
 import Profile from './pages/ProfilePage';
 import History from './pages/HistoryPage';
 import FAQ from './pages/FaqPage';
-import Help from './pages/HelpPage';
 import RegisterPage from './pages/RegisterPage';
 import SearchPage from './pages/SearchPage';
 import { NotAuthenticatedUser, OnlyAuthenticatedUser } from './utils/ProtectedRoutes';
 import TasksPage from './pages/TasksPage';
-import DashboardAppPage from './pages/DashboardAppPage';
-import BlogPage from './pages/BlogPage';
-import UserPage from './pages/UserPage';
-import ProductsPage from './pages/ProductsPage';
+
 // ----------------------------------------------------------------------
 
 // page not found
@@ -40,11 +36,6 @@ export const routes = createBrowserRouter(
             <Route path="profile" element={<Profile />} />
             <Route path="history" element={<History />} />
             <Route path="faq" element={<FAQ />} />
-            <Route path="help" element={<Help />} />
-            <Route path="test" element={<DashboardAppPage />} />
-            <Route path="blog" element={<BlogPage />} />
-            <Route path="products" element={<ProductsPage />} />
-            <Route path="user" element={<UserPage />} />
           </Route>
         </Route>
 

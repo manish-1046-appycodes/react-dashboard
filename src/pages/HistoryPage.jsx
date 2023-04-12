@@ -7,7 +7,7 @@ import { MdPlace } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 // material
-import { Button, Card, CardContent, Chip, Container, Grid, Typography } from '@mui/material';
+import { Card, CardContent, CircularProgress, Container, Grid, Typography } from '@mui/material';
 // redux
 import {
   getUserHistory,
@@ -15,8 +15,6 @@ import {
   selectUserHistoryError,
   selectUserHistoryStatus,
 } from '../redux/history/historySlice';
-// others
-import downloadExcelFile from '../utils/downloadExcelFile';
 // components
 import AppWidgetSummary from '../sections/@dashboard/app/AppWidgetSummary';
 import UserHistoryRecord from '../components/user-history/UserHistoryRecord';
@@ -28,9 +26,9 @@ const History = () => {
   const userHistoryStatus = useSelector(selectUserHistoryStatus);
 
   useEffect(() => {
-    if (userHistory.length < 1) {
-      dispatch(getUserHistory());
-    }
+    // if (userHistory.length < 1) {
+    dispatch(getUserHistory());
+    // }
   }, []);
 
   let content;
@@ -38,7 +36,16 @@ const History = () => {
   if (userHistoryStatus === 'fetching-user-history') {
     content = (
       <Container maxWidth="xl">
-        <AppWidgetSummary title="Fetching your search records" color="info" icon={'ic:round-search'} />
+        <div style={{ display: 'grid', placeContent: 'center' }}>
+          <Card sx={{ marginTop: '30px' }}>
+            <CardContent sx={{ textAlign: 'center' }}>
+              <CircularProgress size={60} />
+              <Typography variant="h5" sx={{ marginTop: '10px' }}>
+                Fetching your search records
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
       </Container>
     );
   }
@@ -82,12 +89,9 @@ const History = () => {
           <Typography variant="h4" sx={{ mb: 5 }}>
             Your Search Records
           </Typography>
-          {userHistory?.user_requests
-            // ?.filter((history) => typeof history?.query !== 'undefined')
-            // ?.reduce((acc, item) => [item].concat(acc), [])
-            ?.map((history) => (
-              <UserHistoryRecord history={history} key={history?.request_id} />
-            ))}
+          {userHistory?.user_requests?.map((history) => (
+            <UserHistoryRecord history={history} key={history?.request_id} />
+          ))}
         </Container>
       );
     } else {
